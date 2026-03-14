@@ -1,17 +1,26 @@
-let n = 5;
+const PATTERN_SIZE = 5;
 
-for (let i = 0; i < n; i++) {
+function factorial(n) {
+    let res = 1;
+    for (let i = 2; i <= n; i++) res *= i;
+    return res;
+}
+
+function nCr(n, r) {
+    return factorial(n) / (factorial(r) * factorial(n - r));
+}
+
+for (let i = 0; i < PATTERN_SIZE; i++) {
     let row = "";
 
-    for (let s = 0; s < i; s++) row += " ";
-
-    let left = n - i;
-    for (let j = 0; j < left; j++) {
-        row += (j === 0 || j === left - 1) ? "1 " : (left - j) + " ";
+    for (let s = 0; s < i; s++) {
+        row += " ";
     }
 
-    for (let j = 1; j < left - 1; j++) {
-        row += (j + 1) + " ";
+    let n = PATTERN_SIZE - 1 - i;
+
+    for (let j = 0; j <= n; j++) {
+        row += nCr(n, j) + " ";
     }
 
     console.log(row.trim());
